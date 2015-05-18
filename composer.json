@@ -1,0 +1,17 @@
+{
+    "name": "daisy/async",
+    "type": "library",
+    "description": "async call for php",
+    "authors": [
+        {
+            "name": "Jackong",
+            "email": "JackongC@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"async\\": "src/async"}
+    },
+    "require": {
+        "firebase/php-jwt": "^2.0"
+    }
+}
