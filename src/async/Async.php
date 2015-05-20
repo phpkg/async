@@ -40,6 +40,7 @@ class Async {
     public function exec($method, $url, $params = [], $headers = []) {
         $tmp1 = [];
         foreach ($params as $key => $value) {
+            $value = is_object($value) || is_array($value) ? json_encode(json_encode($value)) : $value;
             $tmp1[] = "$key=$value";
         }
         $params = implode('&', $tmp1);
@@ -51,13 +52,12 @@ class Async {
         }
         $headers = implode(' ', $tmp2);
 
-        $async = $this->options['sync'] ? '' : '>/dev/null 2>&1 &';
+        $async = isset($this->options['sync']) && $this->options['sync'] ? '' : '>/dev/null 2>&1 &';
         if ($method === 'GET') {
             $cmd = sprintf('curl -X %s %s "%s%s?%s" %s', $method, $headers, $this->options['api'], $url, $params, $async);
         } else {
             $cmd = sprintf('curl -X %s %s --data "%s" "%s%s" %s', $method, $headers, $params, $this->options['api'], $url, $async);
         }
-        var_dump($cmd);
         return shell_exec($cmd);
     }
 } 
