@@ -45,7 +45,7 @@ class Async {
         }
         $params = implode('&', $tmp1);
 
-        $headers['Authorization'] = sprintf('Bearer %s', \JWT::encode(array_merge($this->options['payload']), $this->options['key']));
+	$headers['Authorization'] = sprintf('Bearer %s', \JWT::encode($this->options['payload'], $this->options['key']));
         $tmp2 = [];
         foreach ($headers as $key => $value) {
             $tmp2[] = sprintf('-H "%s: %s"', $key, $value);
