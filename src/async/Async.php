@@ -40,7 +40,7 @@ class Async {
     public function exec($method, $url, $params = [], $headers = []) {
         $tmp1 = [];
         foreach ($params as $key => $value) {
-            $value = is_object($value) || is_array($value) ? json_encode(json_encode($value)) : $value;
+            $value = is_object($value) || is_array($value) ? json_encode(json_encode($value)) : urlencode($value);
             $tmp1[] = "$key=$value";
         }
         $params = implode('&', $tmp1);
